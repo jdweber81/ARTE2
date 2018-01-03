@@ -1,0 +1,372 @@
+﻿
+<span style="background-color: #FFFF00">{{errorMessage}}</span>
+
+
+<meta charset="UTF-8">
+
+
+<body>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
+    <!-- Landing Page -->
+    <div hidden id="div11" class="div11 print1">
+        <div align="center">
+            <iframe width="350"
+                    height="430"
+                    src="https://console.dialogflow.com/api-client/demo/embedded/dcdbf6a8-c415-491b-ae7e-75ac1a90cddd"></iframe>
+        </div>
+
+
+        <p style="text-align:center;"><img src="http://onsitesolutionspt.com/wp-content/themes/on-site-solutions/img/on-site-solutions-logo.svg" alt="Onsite Solutions PT" style="width:304px;height:228px;"></p>
+            <h2 align="center"><b>ARTE Chat</b></h2>
+            <p align="center">powered by <b><a href="https://onsitesolutionspt.weebly.com/arte.html" target="_blank">ARTE</a></b></p>
+            <h3 class="example2" align="center">Visual recognition A.I. programmed, developed and trained by Physical Therapists</h3>
+            <hr />
+        
+    </div>
+
+    <div id="div10" class="div10">
+        <div id="Div1" class="div1">
+            <p style="text-align:center;"><img src="http://onsitesolutionspt.com/wp-content/themes/on-site-solutions/img/on-site-solutions-logo.svg" alt="Onsite Solutions PT" style="width:304px;height:228px;"></p>
+            <h2 align="center"><b>A.I. Office Ergonomic Assessment</b></h2>
+            <p align="center">powered by <b><a href="https://onsitesolutionspt.weebly.com/arte.html" target="_blank">A.R.T.E.</a></b></p>
+            <h3 class="example2" align="center">Visual recognition A.I. programmed, developed and trained by Physical Therapists</h3>
+            <hr />
+            <p class="example" align="left">Directions for use:</p>
+            <p align="left">1) Click <b>Choose</b> to upload an image file (.jpeg format)</p>
+            <p align="left">2) Click <b>Start Assessment</b></p>
+            <p align="left">3) Assessment results and ergonomic suggestions will return below your uploaded image.</p>
+
+            <p-fileUpload name="myfile[]"
+                          url="api/upload"
+                          multiple="false"
+                          accept="image/*"
+                          maxFileSize="10000000"
+                          uploadLabel="Start Assessment"
+                          (onSelect)="onSelect($event)"
+                          (onUpload)="onUpload($event)">
+                <ng-template pTemplate type="content">
+                    <div *ngIf="(showPredictedImage)">
+                        <img [src]="PredictedImage" *ngIf="(PredictedImage != '')" [width]="600" />
+                        <h3>ERGONOMIC ASSESSMENT RESULTS</h3>
+                        <p>After carefully assessing the uploaded workspace setup, your results are listed below:</p>
+
+                        <p-dataTable var="table" [value]="this.CustomVisionResponse.predictions">
+                            <p-column field="tag" header="Ergonomic Assessment Findings"></p-column>
+
+                            <p-column field="link" header="Your Ergonomic Education">
+                                <ng-template let-col let-data="rowData" pTemplate="body">
+                                    <span><a href="{{data.link}}" target="_blank" style="color: blue;">Your Customized Education For This Ergonomic Area</a></span>
+                                </ng-template>
+                            </p-column>
+
+                        </p-dataTable>
+
+
+                        <h3>READING YOUR RESULTS from A.R.T.E.:</h3>
+                        <p>-Based on the uploaded image, A.R.T.E. chose your specific assessment findings (listed above).  A.R.T.E. also provided you a link, with specific ergonomic opportunities, advice and education which are tailored to your specific ergonomic needs.</p>
+                        <!-- Print-friendly view -->
+
+
+
+                    </div>
+                </ng-template>
+            </p-fileUpload>
+
+            <p class="example" align="left">Having trouble with A.R.T.E.? See our <b><a href="https://onsitesolutionspt.weebly.com/faqs.html" target="_blank">Troubleshooting FAQs</a></b></p>
+        </div>
+
+        <div hidden class="div2" id="Div2">
+            <p style="text-align:center;"><img src="http://onsitesolutionspt.com/wp-content/themes/on-site-solutions/img/on-site-solutions-logo.svg" alt="Onsite Solutions PT" style="width:304px;height:228px;"></p>
+            <h2 align="center"><b>A.I. Office Ergonomic Assessment</b></h2>
+            <p align="center">powered by <b>A.R.T.E.</b></p>
+            <p class="example2" align="center">Visual recognition A.I. programmed, developed and trained by Physical Therapists</p>
+            <h2 align="center">YOUR PERSONALIZED ERGONOMIC ASSESSMENT RESULTS</h2>
+            <hr />
+            <p-fileUpload name="myfile[]"
+                          url="api/upload"
+                          multiple="false"
+                          accept="image/*"
+                          maxFileSize="10000000"
+                          uploadLabel="Start Assessment"
+                          (onSelect)="onSelect($event)"
+                          (onUpload)="onUpload($event)">
+                <ng-template pTemplate type="content">
+                    <div *ngIf="(showPredictedImage)">
+                        <img [src]="PredictedImage" *ngIf="(PredictedImage != '')" [width]="600" />
+
+
+                        <h2 class="print1" align="center">To Print Your Results and Education Together, Follow These 2 Steps:</h2>
+                        <h3 class="print1" align="left"><b>STEP 1: SELECT YOUR ERGONOMIC OPPORTUNITIES</b></h3>
+                        <p-dataTable var="table" [value]="this.CustomVisionResponse.predictions">
+                            <p-column field="tag" header="CLICK BELOW to include each ergonomic opportunity in Printed Assessment">
+                                <ng-template let-col let-data="rowData" pTemplate="body">
+                                    <span><a href="{{data.link}}" target="{{data.tag}}" class="{{data.tag}}" id="{{data.tag}}" style="color: blue;">{{data.tag}}</a></span>
+                                </ng-template>
+                            </p-column>
+                        </p-dataTable>
+                    </div>
+                </ng-template>
+            </p-fileUpload>
+            <hr>
+
+
+            <h3 class="print1"><b>STEP 2: PRINT Workstation Assessment (option in menu)</b></h3>
+
+
+            <div hidden class="div13"></div>
+            <div class="div12">
+                <div class="div4" id="div4">
+                    <h1 align="center">General Workstation Assessment</h1>
+                    <h2 align="center">Work station setup</h2>
+
+                    <p><i>A large percentage of individuals working in the workplace do not technically fit into their workstation area.  The main culprit: the physical height of their work surface.  Desks, tables and computer station surfaces are all meant to fit the mean population height. Odds have it, that you do not perfectly match this description.  This is one area where those dreaded work-related repetitive injuries can occur.  Here are some common rules and advice that you can follow to minimize or eliminate the issue.</i></p>
+                    <h3>Work reach</h3>
+                    <p>This is the concept where the things that you use the most frequently are placed closer to you while the lesser used items can be at a further distance.  This tends to be commonsense throughout the rest of your activities in your life outside of the office.  Working with materials on chairs and at odd angles has the potential for neck and other body strain. Frequently used items should be kept close to avoid long reaches.  Specifically, most frequently used items should be within approximately 13-18 inches to limit unnecessary repetitive reaching.</p>
+                    <h3>Work Surface Area</h3>
+                    <p>
+                        General Rule of thumb: The work station top should be big enough to allow space not only for all computer-related necessary equipment, but also for paperwork, books, and other materials needed while working at the computer.
+                        A general recommendation is that the work area top should be at least as big as the standard office desk - 30 inches by 60 inches. A depth of at least 30 inches allows flexibility in use/reuse of the work area. Usable space may be maximized by good wire/cable management.
+                    </p>
+                    <h3>Work surface height: sitting</h3>
+                    <p>
+                        Less a saw and very good carpentry skills the height of your desk is usually not adjustable.  Thats ok, everything else in your workspace usually is.
+                        Most workers can manage with a fixed height work area if chair is adjustable.
+                    </p>
+                    <p><b>Clerical Work:</b> adjust chair height so top surface of desk is just above elbow level.</p>
+                    <p><b>Keyboard work:</b> home row of keyboard should be at approximately elbow height.</p>
+                    <p>Allow adequate clearance for thighs.</p>
+                    <p>Avoid storing objects under desk to allow for adequate leg room</p>
+                    <h3>Work surface height: standing room only</h3>
+                    <p>If you have a job where you stand more than you sit, such as at a work bench or service counter, you can be more prone to develop or already have some sort of low back and/or neck pain.</p>
+                    <h4><i>How to fix a painful situation:</i></h4>
+                    <p>General recommendations:</p>
+                    <p>Benches for collating/stapling - below elbow height.</p>
+                    <p>Benches for writing - above elbow height.</p>
+                    <p>Recommended height for reception counters 36-43 inches.  However, this depends on individual height.</p>
+                    <p>
+                        So you are unable to purchase a tailored workbench or counter for you. You do not have to lose hope yet; Its just time to modify!
+                        Too short for the work surface? Use a stool.  Look for a stool or other elevated surface with an anti-slip surface to interface with the floor.  Why not avoid a fall as well?
+                        Too tall for the work surface?  Modify the work surface itself. Elevate equipment (computers, keyboard) and other frequently used items. Laptop stands, desktop shelving units all fit under this helpful category.
+                    </p>
+                </div>
+                <div class="div5" id="div5">
+                    <h2 align="center">Chairs</h2>
+                    <p>
+                        <i>
+                            Finding a well-fitting chair is a lot like picking out clothes.  A large t-shirt may fit on one person perfectly as well as many others in the population, but may be too big or too small for someone else.  Why would you do the same thing with the chair you have to sit in the majority of your waking hours?
+                            A correct fitting chair is an essential element of a safe work environment.  The chair should support the leg, buttocks, back and arms to reduce stress and exertions
+                        </i>
+                    </p>
+                    <h3>Seat Design</h3>
+                    <p>
+                        Resting that tail-end of yours is not necessarily a bad thing, so long as you are not sitting all the time.  But when doing so, keep a few things in mind.
+                        Seats should have a rounded or <i>waterfall</i> edge. This fits the seat to your 'seat' and lower body like a glove.  If chairs had a flat, cornered edge it would be like sitting on a box. Ouch.
+                        What about height?
+                        Low chairs are miserable for posture and usually cause excessive reaching. Higher (drafting) chairs are usually harder to get up onto. They usually utilize a foot rest rather than the given support ring.   A proper fitting chair will align you correctly with your work space and keep your forearms parallel to the ground while typing and should also allow your feet to rest comfortably on the floor without pressure being placed solely though back of legs and knees.
+                    </p>
+                    <h3>Backrest</h3>
+                    <p>
+                        The backrest should provide appropriate support to maintain the natural curvature of your spine. The lumbar support should fit in the curve of your lower back.
+                        Make adjustments!
+                        -If the backrest of your chair is adjustable, be sure to have the backrest locked at all times
+                        -Adjust the backrest so that  thighs and buttocks are also fully supported by the seat without the seat contacting the back of your legs
+                    </p>
+                    <h3>Armrests</h3>
+                    <p>
+                        Armrests are not necessary and up to the worker.   Why, you may ask? Think about it. If you are following any sort of ergonomic guidelines for the proper fitting chair, your body should theoretically be in the 'perfect' position without any sort of additional support.  BUT, preference usually wins out in this case and a lot of people just want armrests.  If that is the case, Armrests should allow the upper arm to remain close to the torso, wide enough to easily enter and exit the chair, low enough so shoulders are relaxed but not sagging.
+                    </p>
+                    <h3>Base of chair</h3>
+                    <p>
+                        Alright, it may seem like we are getting picky here, but it literally does not hurt to be thorough.
+                        -Should have a strong, five-legged base
+                        -Castors are suitable for carpeted floors.
+                        -Glides to be used on hard floor surfaces.
+                    </p>
+                </div>
+                <div class="div6" id="div6">
+                    <h2 align="center">Posture</h2>
+                    <p>
+                        The Neutral Posture: In this position, muscles should feel relaxed with minimal energy spent trying to maintain your position, which is optimal for focus and productivity.
+                        On the other side of that advice:
+                        Avoid Awkward Postures:  An almost inconceivable amount of money each year is spent on musculoskeletal disorders as a result of chronic poor posture.  We are all guilty of this at one time or another throughout the day, but should not serve as an excuse to not actively attempt to correct it.
+                    </p>
+                </div>
+                <div class="div7" id="div7">
+                    <h2 align="center">Keyboards, the mouse and laptops</h2>
+                    <p>
+                        <i>
+                            So you have learned how to use the keyboard.  Now you can use the computer and type all day. Congratulations, you are now at higher risk for injury!
+                            Face it, no matter what job you have, documentation is how you spend at least half of your day in the best-case scenario, which can lead to some issues with pain if not eventually corrected.  Unfortunately, pain is both commonplace in most work environments and costly.  And it all starts at your keyboard.
+                        </i>
+                    </p>
+                    <h3>Keyboard setup/positioning</h3>
+                    <p>-The 'Feet' at the rear of the keyboard should be kept in a lowered position to minimize the height and angle of the keyboard.</p>
+                    <p>-Where possible the keyboard should be moved away to allow the work surface to be used for other tasks such as writing.</p>
+                    <p>Rule of Thumb: Keyboards should be placed:</p>
+                    <p>-in front of the screen and directly in front of the user so that there is no need to twist or rotate to use it.</p>
+                    <p>-near the front edge of the desk to reduce the reach distance.</p>
+                    <p>-The keyboard should be directly in front of you and not to one side or the other. This should allow for elbows to stay close to you and for your forearms to stay parallel to the floor.</p>
+                    <h3>Keyboard height</h3>
+                    <p>
+                        Unfortunately, the height of the keyboard is more dependent on your work surface height than anything else.  So now what?
+                        Sometimes its as easy as adjusting your work chair height.  But how high or low?
+                    </p>
+                    <p>-Elbows should be about the same height as the keyboard and hang comfortably to the side of the body. This should allow for your shoulders to be relaxed and wrists to be in a neutral position as well</p>
+                    <p><i>*Random fact: 'Vintage' desks, manufactured in the first half of the 20th century were built for the correct ergonomic height for typewriter use, making them often times too low of a surface to use in the modern work environment.</i></p>
+                    <h3>Wrist rests:  Good or Bad?</h3>
+                    <p>
+                        The use of wrist rests should be viewed with some caution. The important factor in determining use of wrist rests is that the wrists should be maintained in a neutral posture.  Other factors that affect this are the tilt and size of the keyboard.  Remember, the whole hand should move and not be kept in one position with the fingers reaching sideways.  Finally, your wrists and elbows should also never rest on a hard or uncomfortable edge.
+                    </p>
+                    <h3>The Mouse: Just point and click</h3>
+                    <p>
+                        The Mouse, one of the most powerful yet underrated inventions of the 20th century.  So powerful, that you can spend thousands of dollars online in seconds just by clicking on it, but simple enough for anybody to use because it is by design, dummy-proof as it has less buttons than you have fingers.
+                    </p>
+                    <p>
+                        But do not be mistaken; just because a mouse is extremely easy to use does not mean that one size fits all.  Each of our hands and wrists are different so do not assume your mouse has to be a one size fits all.  Many different sizes and configurations are available for mouse devices to reduce unnecessary strain.
+                    </p>
+                    <h3>Mouse placement</h3>
+                    <p>-Your mouse should be positioned to allow your wrist to maintain a straight and neutral posture.</p>
+                    <p>-The mouse should be positioned level with the keyboard to minimize unnecessary and repetitive movements</p>
+                    <h3>Laptops - for the true high-tech nomad</h3>
+                    <p>Your laptop: Everything you need for your own workstation. Except a desk.  Or a correct fitting chair.  Or an external mouse.  Or any ergonomic structured design at all.  The sad truth is that you trade all of these amenities away for portability.   But do not worry, the portable work dream of laptops and ergonomic injury prevention are not mutually exclusive.  You just have to follow your mothers advice: everything in moderation.</p>
+                    <p>Things to keep in mind:</p>
+                    <p>-Laptops are not designed for proper ergonomic postures</p>
+                    <p>-If using for prolonged periods it is best to utilize an external keyboard or monitor to optimize work environment.</p>
+                    <p>Using an external mouse rather than the touch pad can also help with prolonged laptop use</p>
+                </div>
+                <div class="div8" id="div8">
+                    <h2 align="center">Computer screens and Lighting issues</h2>
+                    <h3>The Computer screen:  Position is key.</h3>
+                    <p>
+                        Placing your computer screen in the correct spot can help reduce possible side effects such as unnecessary fatigue, eye strain or neck and back pain.  The computer screen should be placed directly in front of you to avoid prolonged head and neck strain.
+                    </p>
+                    <p>Specifically:</p>
+                    <p>
+                        The top of your computer screen should be directly horizontal with your eye level or just slightly lower, to minimize neck flexion (When dealing with a larger screen, you may need some of screen above horizontal eye level).
+                    </p>
+                    <p>The center of the computer monitor should be located approximately 15-20 degrees below horizontal eye level</p>
+                    <h3>Screen Distance</h3>
+                    <p>The distance you sit from your computer screen can vary based on personal preference but the preferred viewing distance is between 20-40 inches from your eyes to the front of the screen.
+                    <p>Feeling cramped? Modify!</p>
+                    <p>
+                        Some options to help create more space could be to pull the desk slightly away from the wall, use a flat screen monitor as opposed to a conventional monitor or install an adjustable keyboard tray.
+                    </p>
+                    <h3>Potential Lighting and visual issues</h3>
+                    <h3>Glare</h3>
+                    <p>
+                        Glare occurs when one part of an area is much brighter than the background or vice versa.  If a bright window is positioned behind a computer screen, the contrast and glare can be considerable.
+                    </p>
+                    <p>
+                        To reduce glare:
+                    </p>
+                    <p>-Control light through windows (i.e. blinds).</p>
+                    <p>-Reduce the contrast between foreground and background.</p>
+                    <p>-Reposition your workstation to reduce light falling on the work surface.</p>
+                    <p>-Reduce your overall general lighting to suit the task. (i.e. blinds)</p>
+                    <p>
+                        Screen filters:  the military bifocals of the office environment. Sure, they are not sleek nor stylish, but they can also aide in your visual health.  If repositioning does not work, use screen filters.
+                    </p>
+                    <h3>Shadows</h3>
+                    <p>
+                        Shadows can encourage poor postures due to poor visibility. Awkward posture can arise when people find it difficult to see what they are working with and they may lean closer to the object or bring it closer to their eyes.
+                    </p>
+                    <p>To reduce:</p>
+                    <p>-Reposition work.</p>
+                    <p>-Redirecting lighting.</p>
+                    <p>-Install adjustable task lamp.</p>
+                    <p>-Remove barriers to light.  (This again includes lurking co-workers)</p>
+                    <h3>Visual rest</h3>
+                    <p>-Eye muscles can become tired when constantly focused on close work.</p>
+                    <p>-To control visual tiredness, a person should focus on an object at a different distance to work that they have been looking at.  This is a similar principle to taking rest breaks.</p>
+                </div>
+            </div>
+
+
+            <button hidden id="button10" class="button10">button10</button>
+            <button hidden class="button11">button11</button>
+            <button hidden class="button12">button12</button>
+            <button hidden class="button13">button13</button>
+            <button hidden class="button14">button14</button>
+            <button hidden class="button15">button15</button>
+            <button hidden class="button16">button16</button>
+            <button hidden class="button17">button17</button>
+
+            <div id="div3">
+                <h1 align="left">Your specific ergonomic opportunities, advice and education:</h1>
+                <br />
+
+                <div style="border:none; overflow: hidden; margin: 15px auto; max-width: 1180px;">
+                    <iframe name="POOR_POSTURE" id="iframe" class="POOR_POSTURE1" src="" style="border:none; margin-left: -30px; height: 1150px; margin-top: -100px; width: 840px;" height="1160" width="840" scrolling="no"></iframe>
+                </div>
+                    <br />
+                <div style="border:none; overflow: hidden; margin: 15px auto; max-width: 1180px;">
+                    <iframe name="GOOD_POSTURE" id="iframe" class="GOOD_POSTURE1" src="" style="border:none; margin-left: -30px; height: 1150px; margin-top: -100px; width: 840px;" height="1160" width="840" scrolling="no"></iframe>
+                    </div>
+                    <br />
+                <div style="border:none; overflow: hidden; margin: 15px auto; max-width: 1180px;">
+                    <iframe name="ELBOWS_NOT_AT_90_DEGREES" id="iframe" class="ELBOWS_NOT_AT_90_DEGREES1" src="" style="border:none; margin-left: -30px; height: 1200px; margin-top: -100px; width: 840px;" scrolling="no"></iframe>
+                   </div>
+                    <br />
+                <div style="border:none; overflow: hidden; margin: 15px auto; max-width: 1180px;">
+                    <iframe name="KEYBOARD_TOO_FAR_AWAY" id="iframe" class="KEYBOARD_TOO_FAR_AWAY1" src="" style="border:none; margin-left: -30px; height: 1300px; margin-top: -100px; width: 840px;" scrolling="no"></iframe>
+                    </div>
+                    <br />
+                <div style="border:none; overflow: hidden; margin: 15px auto; max-width: 1180px;">
+                    <iframe name="ELBOWS_AT_90_DEGREES" id="iframe" class="ELBOWS_AT_90_DEGREES1" src="" style="border:none; margin-left: -30px; height: 1400px; margin-top: -100px; width: 840px;" scrolling="no"></iframe>
+                    </div>
+                    <br />
+                <div style="border:none; overflow: hidden; margin: 15px auto; max-width: 1180px;">
+                    <iframe name="KEYBOARD_POSITIONED_CORRECTLY" id="iframe" class="KEYBOARD_POSITIONED_CORRECTLY1" src="" style="border:none; margin-left: -30px; height: 1270px; margin-top: -100px; width: 840px;" scrolling="no"></iframe>
+                    </div>
+                    <br />
+                <div style="border:none; overflow: hidden; margin: 15px auto; max-width: 1180px;">
+                    <iframe name="CHAIR_HEIGHT_TOO_LOW" id="iframe" class="CHAIR_HEIGHT_TOO_LOW1" src="" style="border:none; margin-left: -30px; height: 1335px; margin-top: -100px; width: 840px;" scrolling="no"></iframe>
+                   </div>
+                    <br />
+                <div style="border:none; overflow: hidden; margin: 15px auto; max-width: 1180px;">
+                    <iframe name="CHAIR_HEIGHT_IS_ADEQUATE" id="iframe" class="CHAIR_HEIGHT_IS_ADEQUATE1" src="" style="border:none; margin-left: -30px; height: 1335px; margin-top: -100px; width: 840px;" scrolling="no"></iframe>
+                    </div>
+                    <br />
+
+
+                </div>
+            <br />
+
+        </div>
+    </div>
+</body>
+
+<style>
+    Div2 {
+        display: none;
+    }
+</style>
+<style>
+    Div4 {
+        display: none;
+    }
+</style>
+<style>
+    Div5 {
+        display: none;
+    }
+</style>
+<style>
+    Div6 {
+        display: none;
+    }
+</style>
+<style>
+    Div7 {
+        display: none;
+    }
+</style>
+<style>
+    Div8 {
+        display: none;
+    }
+</style>
+
